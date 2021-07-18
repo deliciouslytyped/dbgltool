@@ -8,7 +8,9 @@ This repository contains `dbgltool` which is a tool for generating the content o
 (Section creaton can be done with `objcopy`.) along with some Nix code for patching binaries and libraries
 in the Nix store to support out-of-the-box source availibility when using GDB.
 
-These two mechanisms are implementation-wise, orthogonal but serve a related purpose.
+There is a third solution which involved applying a two line patch to binutils which removed the `lbasename()` call.
+
+These three mechanisms are implementation-wise, orthogonal but serve a related purpose.
 
 TODO See the `docs` directory for more information.
 
