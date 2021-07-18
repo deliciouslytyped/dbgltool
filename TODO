@@ -1,0 +1,24 @@
+- add a Makefile that also runs tests and repo tests
+- finish documentation
+- be more thorough with the LICENSE stuff
+- add and clean up the nix code (doesnt use dbgltool, uses a spec-conformant scheme)
+- fix the TODOs in Readme.md
+
+Upstream:
+  .gnu_debuglink:
+    - find a spec
+    - (alterntively) find who is responsible
+    - find out why it's limited to a basename
+    - get it extended if possible
+  .gnu_debugaltlink
+    - what is this? it can be found in the binutils and elfutils (IIRC) source
+  debugedit:
+    - why does `-l` require write access
+    - behavior of `-b` without `-d` is unclear, interface should be refactored if unnecessary
+    - `-b /` doesn't work? (`-b /build` does)
+    - `DWARF version 0 unhandled` on compressed sections is misleading (-> get a better error
+      message, that perhaps even suggests using objcopy to decompress)
+  objcopy:
+    - `objcopy --add-gnu-debuglink tagetpath somebin` appears to take the path of the target
+      file relative to CWD and not relative to somebin. This seems unintutive to me; but at
+      the least, it would be nice if the error message somehow clarified this

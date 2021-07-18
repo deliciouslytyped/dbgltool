@@ -1,0 +1,100 @@
+++ nix-build --no-out-link -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
++ dbgltool=/nix/store/bcwapy1wjcpssb8dvv45x283d6il6zbs-dbgltool/bin/dbgltool
+++ nix-build --no-out-link -E '(import /bakery7/oven7/ephemeral/nixpkgs/debugedit {}).debugedit-unstable'
++ debugedit=/nix/store/drlpwp8ywbw53p82yjkvli71k2sxkhvm-debugedit/bin/debugedit
+++ mktemp -t test.XXXXXXXXXX -d
++ pushd /run/user/1000/test.H7XJw9mV7S
+/run/user/1000/test.H7XJw9mV7S /tmp/tmp.kT43z04Ofb
++++ nix-build '<nixpkgs>' -A glibc.debug
+++ cp -r /nix/store/12nhr313dlk4mbkgmwrgjcz830fh1cxa-glibc-2.32-37-debug ./debug
+++ chmod -R +w ./debug
+++ pwd
++ target=/run/user/1000/test.H7XJw9mV7S/debug/lib/debug/ld-2.32.so
++ path=../../../../../../../..//run/user/1000/test.H7XJw9mV7S/debug/lib/debug/ld-2.32.so
+++ set +x
++ src=/run/user/1000/test.w68C6mM9ka
+++ pwd
++ ldso=/run/user/1000/test.H7XJw9mV7S/glibc/lib/ld-2.32.so
++ pwd
+/run/user/1000/test.H7XJw9mV7S
+++ which hello
++ cp /nix/store/nm7d7i9jlqf25nwvan7ghlv3jafnbryj-hello-2.10/bin/hello .
++ chmod +w hello
+++ nix-build '<nixpkgs>' -A glibc --no-out-link
++ cp -r /nix/store/hp8wcylqr14hrrpqap4wdrwzq092wfln-glibc-2.32-37 ./glibc
++ chmod -R +w glibc
++ patchelf --set-interpreter /run/user/1000/test.H7XJw9mV7S/glibc/lib/ld-2.32.so ./hello
++ objcopy --remove-section .gnu_debuglink /run/user/1000/test.H7XJw9mV7S/glibc/lib/ld-2.32.so
++ objcopy --decompress-debug-sections /run/user/1000/test.H7XJw9mV7S/debug/lib/debug/ld-2.32.so
++ /nix/store/drlpwp8ywbw53p82yjkvli71k2sxkhvm-debugedit/bin/debugedit -b /build -d /run/user/1000/test.w68C6mM9ka /run/user/1000/test.H7XJw9mV7S/debug/lib/debug/ld-2.32.so
++ objcopy --add-section .gnu_debuglink=/dev/fd/63 /run/user/1000/test.H7XJw9mV7S/glibc/lib/ld-2.32.so
+++ /nix/store/bcwapy1wjcpssb8dvv45x283d6il6zbs-dbgltool/bin/dbgltool d ../../../../../../../..//run/user/1000/test.H7XJw9mV7S/debug/lib/debug/ld-2.32.so /dev/fd/63
++++ /nix/store/bcwapy1wjcpssb8dvv45x283d6il6zbs-dbgltool/bin/dbgltool c /run/user/1000/test.H7XJw9mV7S/debug/lib/debug/ld-2.32.so
++ readelf -x .gnu_debuglink /run/user/1000/test.H7XJw9mV7S/glibc/lib/ld-2.32.so
+
+Hex dump of section '.gnu_debuglink':
+  0x00000000 2e2e2f2e 2e2f2e2e 2f2e2e2f 2e2e2f2e ../../../../../.
+  0x00000010 2e2f2e2e 2f2e2e2f 2f72756e 2f757365 ./../..//run/use
+  0x00000020 722f3130 30302f74 6573742e 4837584a r/1000/test.H7XJ
+  0x00000030 77396d56 37532f64 65627567 2f6c6962 w9mV7S/debug/lib
+  0x00000040 2f646562 75672f6c 642d322e 33322e73 /debug/ld-2.32.s
+  0x00000050 6f000000 bf49c135                   o....I.5
+
++ gdb -q ./hello -ex 'set confirm off' -ex 'set breakpoint pending on' -ex 'b dl_main' -ex 'set debug separate-debug-file 1' -ex run -ex 'set listsize 40' -ex list -ex quit
+Reading symbols from ./hello...
+(No debugging symbols found in ./hello)
+Function "dl_main" not defined.
+Breakpoint 1 (dl_main) pending.
+Starting program: /run/user/1000/test.H7XJw9mV7S/hello 
+
+Looking for separate debug info (build-id) for /run/user/1000/test.H7XJw9mV7S/glibc/lib/ld-2.32.so
+  Trying /nix/store/0gpk5h3sbq6z9krdphs5204cy2x5ajn6-gdb-10.1/lib/debug/.build-id/fb/7d69540fe82f412d63f7136e11cd0b0d6ad702.debug... no, unable to compute real path
+
+Looking for separate debug info (debug link) for /run/user/1000/test.H7XJw9mV7S/glibc/lib/ld-2.32.so
+  Trying /run/user/1000/test.H7XJw9mV7S/glibc/lib/../../../../../../../..//run/user/1000/test.H7XJw9mV7S/debug/lib/debug/ld-2.32.so... yes!
+
+Looking for separate debug info (build-id) for system-supplied DSO at 0x7ffff7fd1000
+  Trying /nix/store/0gpk5h3sbq6z9krdphs5204cy2x5ajn6-gdb-10.1/lib/debug/.build-id/f1/80cab291bf95947f6c97e49727cacda6e66e82.debug... no, unable to compute real path
+
+Breakpoint 1, dl_main (phdr=0x400040, phnum=11, user_entry=0x7fffffff5c00, auxv=0x7fffffff6178) at rtld.c:1164
+1164	  audit_list_init (&audit_list);
+1144	}
+1145	
+1146	static void
+1147	dl_main (const ElfW(Phdr) *phdr,
+1148		 ElfW(Word) phnum,
+1149		 ElfW(Addr) *user_entry,
+1150		 ElfW(auxv_t) *auxv)
+1151	{
+1152	  const ElfW(Phdr) *ph;
+1153	  enum mode mode;
+1154	  struct link_map *main_map;
+1155	  size_t file_size;
+1156	  char *file;
+1157	  bool has_interp = false;
+1158	  unsigned int i;
+1159	  bool prelinked = false;
+1160	  bool rtld_is_main = false;
+1161	  void *tcbp = NULL;
+1162	
+1163	  struct audit_list audit_list;
+1164	  audit_list_init (&audit_list);
+1165	
+1166	  GL(dl_init_static_tls) = &_dl_nothread_init_static_tls;
+1167	
+1168	#if defined SHARED && defined _LIBC_REENTRANT \
+1169	    && defined __rtld_lock_default_lock_recursive
+1170	  GL(dl_rtld_lock_recursive) = rtld_lock_default_lock_recursive;
+1171	  GL(dl_rtld_unlock_recursive) = rtld_lock_default_unlock_recursive;
+1172	#endif
+1173	
+1174	  /* The explicit initialization here is cheaper than processing the reloc
+1175	     in the _rtld_local definition's initializer.  */
+1176	  GL(dl_make_stack_executable_hook) = &_dl_make_stack_executable;
+1177	
+1178	  /* Process the environment variable which control the behaviour.  */
+1179	  process_envvars (&mode, &audit_list);
+1180	
+1181	#ifndef HAVE_INLINED_SYSCALLS
+1182	  /* Set up a flag which tells we are just starting.  */
+1183	  _dl_starting_up = 1;
