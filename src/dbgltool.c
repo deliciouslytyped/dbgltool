@@ -110,7 +110,7 @@ int main(int argc, char** argv){
     printf("usage: %s [c FILE] | [d CONTENT CRC_FILE]\n"
            "usage: objcopy --add-section .gnu_debuglink=<(dbgltool d ../whatever <(dbgltool c ../whatever ))\n"
            "dbgltool (debuglink tool) is a small tool for generating .gnu_debuglink data without restrictions (buyer beware).\n"
-           "Specifically, without the basename restrictoin.\n"
+           "Specifically, without the basename restriction.\n"
            "The set value can be checked with a hex viewer such as xxd and objdump, or readelf, e.g.: `readelf -x .gnu_debuglink filename`.\n"
            "you can edit test binaries with `objcopy --add-gnu-debuglink` and other appropriate objcopy flags.\n"
            "See also https://sourceware.org/gdb/onlinedocs/gdb/Separate-Debug-Files.html\n",
