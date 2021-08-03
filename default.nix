@@ -18,5 +18,5 @@ let
   shell = mkShell { buildInputs = builtins.attrValues packages; };
   devShell = mkShell { buildInputs = [ niv ]; };
 in {
-  inherit shell devShell;
+  inherit shell devShell pkgs;
   } // packages

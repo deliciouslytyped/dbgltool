@@ -3,6 +3,12 @@ Quick usage:
 
 TODO `$(nix-build https://github.com/deliciouslytyped/dbgltool/tarball/master -A 'substDbgLib { bin = "bin/hello"; drv = pkgs.hello; tgt = withDebugOutput pkgs.glibc; };' --no-out-link)`
 
+Building
+========
+Needs `gcc`, GNU `make`, and some usual shell utils and thats it.
+
+Description
+===========
 
 This repository contains `dbgltool` which is a tool for generating the content of `.gnu_debuglink` sections,
 (Section creaton can be done with `objcopy`.) along with some Nix code for patching binaries and libraries

@@ -3,6 +3,12 @@
 - be more thorough with the LICENSE stuff
 - add and clean up the nix code (doesnt use dbgltool, uses a spec-conformant scheme)
 - fix the TODOs in Readme.md
+- document `make` processes
+- implement the nix scripts as a makefile; it should be more readable re: declarative-ish
+  directory structure?
+- figure out whether debuginfod makes this redundant
+  https://archive.fosdem.org/2020/schedule/event/debugging_debuginfod/attachments/slides/3887/export/events/attachments/debugging_debuginfod/slides/3887/debuginfod.pdf
+  also links dwarffs
 
 Upstream:
   .gnu_debuglink:
