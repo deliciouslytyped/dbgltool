@@ -1,5 +1,7 @@
 usage: %s [c FILE] | [d CONTENT CRC_FILE]
 usage: objcopy --add-section .gnu_debuglink=<(dbgltool d ../whatever <(dbgltool c ../whatever ))
+The c mode calculates and prints the crc of the file.
+The d mode constructs and prints data according to the .gnu_debuglink description
 dbgltool (debuglink tool) is a small tool for generating .gnu_debuglink data without restrictions (buyer beware).
 Specifically, without the basename restriction.
 The set value can be checked with a hex viewer such as xxd and objdump, or readelf, e.g.: `readelf -x .gnu_debuglink filename`.

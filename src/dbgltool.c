@@ -56,6 +56,7 @@ int main(int argc, char** argv){
       print_crc32(argv[2]);
       break;
     // print .gnu_debuglink content
+    //TODO can probably actually just have bash handle this and reduce this tool to a CRC tool?
     case 'd': {
       FILE* handle = fopen(argv[3], "r");
       if(!handle) { perror(argv[3]); return 1; };

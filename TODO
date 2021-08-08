@@ -1,3 +1,18 @@
+(
+feautures;
+- patch ldso with debug
+- patch a given library with debug
+  - handle case with separate debug info
+  - handle case with built in debug info
+
+executable -> library [->] debug info -> source
+)
+
+- alternative approaches to list in the proposal:
+  - patch gdb
+  - get upstream to lift the restriction
+- see also dwarffs
+
 - add a Makefile that also runs tests and repo tests
 - finish documentation
 - be more thorough with the LICENSE stuff

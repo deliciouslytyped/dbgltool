@@ -1,0 +1,12 @@
+#TODO?
+#clean-debug:
+#       objcopy --remove-section .gnu_debuglink $ldso #idempotency
+
+define BOGUS
+objcopy --remove-section .gnu_debuglink $ldso #idempotency
+# NOTE: I keep foretting about the decompression part...
+objcopy --decompress-debug-sections $target
+$debugedit -b "/build" -d "$src" $target
+objcopy --add-section .gnu_debuglink=<($dbgltool d $path <($dbgltool c $target)) $ldso
+endef
+

@@ -1,0 +1,5 @@
+intermediate paths must exist, stuff like this wont work from other dirs, but because the build sandbox has an abspath its fine? 
+ah no this should be fine the first component is the current dir
+Looking for separate debug info (debug link) for test/54/out/glibc-debug-separate-lib/lib/ld-2.33.so
+  Trying test/54/out/glibc-debug-separate-lib/lib/../../../../../../../../../../../../../../../..//bakery7/oven7/ephemeral/repocache/dbgltool/2/src/make/test/54/out/glibc-debug-separate-debug/lib/debug/ld-2.33.so... yes!
+
